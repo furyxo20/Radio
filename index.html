@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="si"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shop Radio</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#ffb02e;--bg:#0c0a1d;--gl:rgba(255,255,255,.065);--bd:rgba(255,255,255,.11);--tx:#f6f3ff;--mut:#a09cc0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Sinhala",system-ui,sans-serif;line-height:1.5;min-height:100vh}
+.bgf{position:fixed;inset:0;z-index:-1;overflow:hidden}.bgf i{position:absolute;width:70vmax;height:70vmax;border-radius:50%;opacity:.38;will-change:transform;animation:fl 24s infinite alternate ease-in-out}
+.bgf i:nth-child(1){background:radial-gradient(circle,var(--ac),transparent 65%);top:-30vmax;left:-25vmax}.bgf i:nth-child(2){background:radial-gradient(circle,#5a46ff,transparent 65%);bottom:-35vmax;right:-25vmax;animation-delay:-9s}
+@keyframes fl{to{transform:translate(9vmax,7vmax) scale(1.2)}}
+main{max-width:540px;margin:0 auto;padding:16px 14px 40px;padding-top:max(16px,env(safe-area-inset-top))}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+h1{font-size:1.35rem;margin:0}.mut{color:var(--mut);font-size:.84rem}.c{text-align:center}
+.air{padding:5px 12px;border-radius:99px;border:1px solid var(--bd);font-size:.8rem;font-weight:700;white-space:nowrap;color:var(--mut)}
+.air.on{background:#e5173f;border-color:#e5173f;color:#fff;animation:blink 1.6s infinite}@keyframes blink{50%{opacity:.65}}
+.card{background:var(--gl);border:1px solid var(--bd);border-radius:22px;padding:16px;margin-bottom:14px;animation:up .7s cubic-bezier(.2,.8,.2,1) both}main>section.card:nth-of-type(2){animation-delay:.08s}main>section.card:nth-of-type(3){animation-delay:.16s}header{animation:up .6s cubic-bezier(.2,.8,.2,1) both}@keyframes up{from{opacity:0;transform:translateY(18px)}}
+.hero{text-align:center;padding-top:22px}
+.dw{position:relative;width:min(62vw,250px);aspect-ratio:1;margin:0 auto 16px}.glow{position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,var(--ac),transparent 68%);opacity:0;transform:scale(.8);will-change:transform,opacity;transition:transform .12s linear,opacity .12s linear}.dw.play .glow{opacity:.2;transform:scale(.92)}.disc{width:100%;aspect-ratio:1;border-radius:50%;position:relative;background:repeating-radial-gradient(circle,#15122b 0 3px,#1d1940 3px 6px);box-shadow:0 0 0 1px var(--bd),0 18px 50px rgba(0,0,0,.5);will-change:transform;animation:spin 5s linear infinite paused}
+.disc.play{animation-play-state:running}
+.disc:before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 20deg,transparent,rgba(255,255,255,.14),transparent 30%,transparent 55%,rgba(255,255,255,.1),transparent 80%)}
+.disc b{position:absolute;inset:33%;border-radius:50%;background:var(--ac);display:grid;place-items:center;font-size:clamp(1.4rem,9vw,2.2rem);color:#1a1200}
+@keyframes spin{to{transform:rotate(360deg)}}
+.np{font-weight:700;font-size:1.1rem;min-height:1.7em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px}
+.pr{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--mut);margin:6px 0 12px}.pr input{flex:1;margin:0}
+.ctl{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:12px}
+button{font:inherit;color:var(--tx);background:var(--gl);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;cursor:pointer;transition:transform .15s,background .2s}
+button:active{transform:scale(.93)}
+.ic{width:46px;height:46px;border-radius:50%;padding:0;font-size:1.15rem}.ic.on{background:var(--ac);color:#1a1200;border-color:var(--ac)}
+.pp{width:78px;height:78px;border-radius:50%;border:0;font-size:1.9rem;color:#1a1200;background:var(--ac);padding:0}
+.pp{position:relative}.pp.run:after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--ac);animation:ring 2.2s ease-out infinite;pointer-events:none}@keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(1.7);opacity:0}}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 0}
+label{display:block;font-size:.85rem;color:var(--mut);margin-top:12px}label.ck{display:flex;align-items:center;gap:8px}
+input,textarea{width:100%;margin-top:5px;padding:10px;font:inherit;color:var(--tx);background:rgba(0,0,0,.25);border:1px solid var(--bd);border-radius:12px}
+input[type=range]{padding:0;accent-color:var(--ac);background:none;border:0}input[type=checkbox]{width:auto;margin:0}input[type=color]{height:44px;padding:3px}
+.meter{position:relative;height:12px;border-radius:9px;background:rgba(0,0,0,.35);margin:12px 0;overflow:hidden}
+.meter div{height:100%;width:100%;transform:scaleX(0);transform-origin:left;border-radius:9px;background:linear-gradient(90deg,#2ee6a6,var(--ac),#ff4d6d);transition:transform .12s linear}.meter u{position:absolute;top:0;bottom:0;width:3px;background:#fff}
+.tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto}.tabs button{flex:1 0 auto}.tabs .a{background:var(--ac);color:#1a1200;border-color:var(--ac);font-weight:600}
+.pane{display:none}.pane.a{display:block;animation:in .35s ease both}@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.it{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid var(--bd);font-size:.9rem}.it span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.it button{padding:4px 10px}
+.it.on span{color:var(--ac);font-weight:700}.it select{font:inherit;background:#222;color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:3px;max-width:86px}
+hr{border:0;border-top:1px solid var(--bd);margin:16px 0}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,90px);background:#fff;color:#111;padding:10px 16px;border-radius:14px;font-size:.88rem;max-width:90vw;transition:transform .35s cubic-bezier(.2,1.3,.4,1);z-index:120}#toast.s{transform:translate(-50%,0)}
+#disp{display:none;position:fixed;inset:0;z-index:98;text-align:center;padding:5vh 6vw;background:radial-gradient(circle at 30% 20%,var(--ac),#10082e 70%);flex-direction:column;justify-content:center;align-items:center;gap:3vh;font-size:4.5vw}
+#disp .b1{font-size:9vw;font-weight:700;line-height:1.1}#dof{font-size:6vw;min-height:14vh;transition:opacity .6s}
+#don{position:absolute;top:3vh;right:4vw;background:#e5173f;padding:.3em 1em;border-radius:99px;font-weight:700;opacity:0;transition:opacity .4s}
+.eq{display:flex;gap:1.4vw;height:9vh;align-items:flex-end}.eq i{width:2.4vw;background:#fff;border-radius:3px;height:100%;transform:scaleY(.25);transform-origin:bottom;animation:eq 1s infinite ease-in-out}.eq i:nth-child(2n){animation-delay:.25s}.eq i:nth-child(3n){animation-delay:.5s}@keyframes eq{50%{transform:scaleY(1)}}.idle .eq i{animation-play-state:paused}
+.na *,.na .bgf i{animation:none!important}.it{content-visibility:auto;contain-intrinsic-size:auto 44px;transition:background .25s}.it:hover{background:rgba(255,255,255,.05)}.np.sw{animation:swap .55s cubic-bezier(.2,.8,.2,1)}@keyframes swap{from{opacity:0;transform:translateY(10px)}}.vz{display:flex;gap:4px;justify-content:center;align-items:flex-end;height:30px;margin:-6px 0 10px}.vz i{width:4px;height:100%;border-radius:3px;background:var(--ac);opacity:.85;transform:scaleY(.12);transform-origin:bottom;animation:vz 1s ease-in-out infinite alternate paused}.vz.play i{animation-play-state:running}@keyframes vz{to{transform:scaleY(1)}}.it.over{background:rgba(255,176,46,.22)}.it.drag{opacity:.45}.hd{cursor:grab;touch-action:none;color:var(--mut);padding:0 4px;user-select:none;flex:none}#t2{cursor:pointer;min-width:44px;text-align:right}#t1{min-width:44px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="bgf"><i></i><i></i></div>
+<main>
+<header><div><h1 id="h1">📻 Shop Radio</h1><div id="st" class="mut">නවත්තලා</div></div><div id="air" class="air">OFF AIR</div></header>
+<section class="card hero">
+ <div id="dw" class="dw"><div id="glow" class="glow"></div><div id="disc" class="disc"><b>♪</b></div></div><div id="vz" class="vz"></div>
+ <div id="np" class="np">සිංදු දාලා ▶ ඔබන්න</div>
+ <div class="pr"><span id="t1">0:00</span><input type="range" id="seek" min="0" max="1000" value="0"><span id="t2">0:00</span></div>
+ <div class="ctl"><button id="shf" class="ic" title="Shuffle">🔀</button><button id="prv" class="ic">⏮</button><button id="pp" class="pp">▶</button><button id="nxt" class="ic">⏭</button><button id="lp" class="ic" title="Loop">🔁</button></div>
+ <div class="row"><button id="stop">⏹ නවත්තන්න</button><button id="adnow">📢 දැන්ම ඇඩ් එකක්</button></div>
+ <div id="cd" class="mut c" style="margin-top:10px"></div>
+ <label>🔊 සිංදු volume<input type="range" id="mv" min="0" max="100"></label>
+</section>
+<section class="card">
+ <b>🎙 Auto volume</b> <span class="mut">කඩේ සද්දෙ වැඩි වුණාම සිංදුව අඩු වෙනවා, නිශ්ශබ්ද වුණාම ආයෙ වැඩි වෙනවා</span>
+ <div class="meter"><div id="meter"></div><u id="mk"></u></div>
+ <div class="row"><button id="micb">🎙 ක්‍රියාත්මක කරන්න</button><button id="cal">🎯 Calibrate</button></div>
+ <label>Threshold (සුදු ඉර) <b id="thv"></b><input type="range" id="thr" min="1" max="100"></label>
+ <div id="micst" class="mut"></div>
+</section>
+<section class="card"><div class="row"><button id="dispb">📺 Display</button><button id="dimb">🌙 Screen black</button></div>
+ <button id="live" style="width:100%;margin-top:8px;touch-action:none;user-select:none;-webkit-user-select:none">🎤 අල්ලගෙන කතා කරන්න (headphone/BT speaker වලට හොඳයි)</button></section>
+<div class="tabs"><button class="a" data-p="p1">🎵 සිංදු</button><button data-p="p2">📢 Voices</button><button data-p="p3">⚙️ සැකසුම්</button><button data-p="p4">📊 රිපෝට්</button></div>
+<section class="card pane a" id="p1"></section>
+<section class="card pane" id="p2"></section>
+<section class="card pane" id="p3"><div id="sets"></div><hr><div class="row"><button id="bk">💾 Backup (සැකසුම්)</button><button id="rs">♻️ Restore</button></div><input type="file" id="rsf" style="display:none"></section>
+<section class="card pane" id="p4"><div id="sum" style="font-weight:700"></div><div id="sl"></div><button id="clrlog" style="width:100%;margin-top:10px">🧹 Log මකන්න</button></section>
+</main>
+<div id="disp"><div id="don">🔴 ON AIR</div><div id="d1" class="b1"></div><div id="d2" class="b1" style="font-size:15vw"></div><div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="d3"></div><div id="dof"></div></div>
+<div id="dim" style="display:none;position:fixed;inset:0;background:#000;z-index:99;color:#555;text-align:center;padding-top:38vh;font-size:1.2rem">🌙 Radio ප්ලේ වෙනවා<br><span id="dclk" style="font-size:2rem"></span><br><small>ආයෙ පේන්න screen එක ඔබන්න</small></div>
+<div id="toast"></div>
+<script>
+const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms)),clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const mmss=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+let tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('s');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('s'),3500)}
+addEventListener('error',e=>toast('❌ '+e.message));
+/* ---------- settings ---------- */
+let S={iv:4,mv:80,av:100,bv:25,dv:20,jn:2,jd:8,sn:3,sjv:100,sjAll:true,sh:true,loop:true,tm:true,md:35,thr:30,qt:5,stopAt:'',shop:'',col:'#ffb02e',offers:'',rush:'',rushIv:4,adOn:true,bgOn:true,nmOn:true,sjOn:true,fd:true,fi:2,fo:3,auto:false,lt:2,rem:true,kb:true,wk:true,na:false,vsOn:false,vsch:'12:00-14:00',vsv:40,ord:[]};
+try{if(!localStorage.getItem('sr2')){const o=JSON.parse(localStorage.getItem('sr_s')||'null');if(o){['iv','mv','av','bv','dv','jn','sn','sjv','sjAll','rush','rushIv','tm','loop','sh','fd','stopAt','offers'].forEach(k=>{if(o[k]!==undefined)S[k]=o[k]});if(o.shopName)S.shop=o.shopName;if(o.jn===0){S.nmOn=false;S.jn=2}if(o.sn===0){S.sjOn=false;S.sn=3}}}}catch(e){}
+try{Object.assign(S,JSON.parse(localStorage.getItem('sr2')||'{}'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('sr2',JSON.stringify(S))}catch(e){}};
+const SET=[['','h','','','📢 ඇඩ්'],['adOn','c','','','ඇඩ් ක්‍රියාත්මකයි'],['iv','r',1,20,'ඇඩ් එකක් අතර විනාඩි'],['rush','t','','','⚡ Rush hour වෙලාව (17:00-20:00, හිස් = නෑ)'],['rushIv','r',1,20,'Rush hour වලදි ඇඩ් අතර විනාඩි'],['av','r',0,100,'ඇඩ් voice volume'],['bgOn','c','','','ඇඩ් වලට background music දාන්න'],['bv','r',0,100,'Background music volume'],['dv','r',0,60,'ඇඩ් වෙද්දි සිංදුවේ volume %'],
+['','h','','','🏪 වෙනත් voices'],['nmOn','c','','','ශොප් නම voice ක්‍රියාත්මකයි'],['jn','r',1,8,'ශොප් නම voice සිංදු කීයකට වරක්ද'],['jd','r',3,30,'ශොප් නම voice එක සිංදුව පටන් ගෙන තත්පර කීයෙන්ද'],['sjOn','c','','','ශොප් සිංදු කෑලි ක්‍රියාත්මකයි'],['sn','r',1,10,'ශොප් සිංදු කෑලි සිංදු කීයකට පස්සේද'],['sjv','r',0,100,'ශොප් සිංදු කෑලි volume'],['sjAll','c','','','කෑලි ඔක්කොම නමේ පිළිවෙලට ප්ලේ කරන්න (1, 2…). නැත්නම් හැම වතාවෙම එකක් random'],['tm','c','','','හැම පැය බාගෙටම වෙලාව කියන්න'],
+['','h','','','🎙 Auto volume (mic)'],['auto','c','','','Auto volume ක්‍රියාත්මකයි (කඩේ සද්දෙට අනුව සිංදුව අඩු/වැඩි)'],['md','r',5,90,'සද්දෙ වැඩි වුණාම සිංදුවේ volume %'],['lt','r',1,10,'සද්දෙ වැඩි බව තත්පර කීයක් තිබුණොත් අඩු කරනවාද'],['qt','r',2,30,'නිශ්ශබ්ද වී තත්පර කීයකට පස්සේ ආයෙ වැඩි කරනවාද'],
+['','h','','','🎵 සිංදු'],['sh','c','','','Shuffle (queue එක ඉවර වෙනකම් එකම සිංදුව ආයෙ නෑ)'],['loop','c','','','Queue එක ඉවර වුණාම ආයෙ මුල ඉඳන්'],['fd','c','','','සිංදු මාරු වෙද්දි fade in / fade out'],['fi','r',0,8,'Fade in තත්පර'],['fo','r',0,10,'Fade out තත්පර'],['vsOn','c','','','වෙලාවකට volume වෙනස් කරන්න (ඒ වෙලාවේ ඉහළ volume slider එක වැඩ නෑ)'],['vsch','t','','','ඒ වෙලාව (12:00-14:00)'],['vsv','r',0,100,'ඒ වෙලාවේ volume %'],
+['','h','','','🖥 වෙනත්'],['rem','c','','','Timer එකේ ඉතිරි වෙලාව පෙන්නන්න (නැත්නම් මුළු වෙලාව)'],['kb','c','','','Keyboard shortcuts (Space = pause, ← → = prev/next)'],['wk','c','','','Screen එක off වෙන්න දෙන්නෑ'],['na','c','','','Animations අයින් කරන්න (battery/CPU save)'],['stopAt','time','','','කඩේ වහන වෙලාවට auto නවත්තන්න'],['shop','t','','','කඩේ නම'],['col','color','','','Brand color'],['offers','a','','','📺 Display mode offers (පේළියකට එකක්)']];
+SET.forEach(([k,t,mn,mx,lb])=>{if(t==='h'){const h=document.createElement('b');h.style.cssText='display:block;margin-top:18px';h.textContent=lb;$('sets').appendChild(h);return}const w=document.createElement('label');
+ if(t==='c'){w.className='ck';w.innerHTML='<input type="checkbox" id="s_'+k+'">'+lb}
+ else if(t==='a')w.innerHTML=lb+'<textarea id="s_'+k+'" rows="3"></textarea>';
+ else if(t==='r')w.innerHTML=lb+' <b id="s_'+k+'v"></b><input type="range" id="s_'+k+'" min="'+mn+'" max="'+mx+'">';
+ else w.innerHTML=lb+'<input type="'+t+'" id="s_'+k+'">';
+ $('sets').appendChild(w);const el=$('s_'+k);t==='c'?el.checked=S[k]:el.value=S[k];
+ el.oninput=()=>{S[k]=t==='c'?el.checked:t==='r'?+el.value:el.value;sv();upd();if(k==='sh'&&running)refill(true);if(k==='auto')setAuto(S.auto);if(k==='iv'||k==='rush'||k==='rushIv')adLeft=Math.min(adLeft,ivNow()*60000)}});
+function upd(){SET.forEach(([k,t])=>{if(t==='r')$('s_'+k+'v').textContent=S[k]});$('mv').value=S.mv;$('thr').value=S.thr;$('thv').textContent=S.thr;$('mk').style.left=S.thr+'%';
+ $('h1').textContent='📻 '+(S.shop||'Shop')+' Radio';document.documentElement.style.setProperty('--ac',S.col||'#ffb02e');
+ document.body.classList.toggle('na',S.na);if(!an)$('micb').textContent=S.auto?'🎙 Radio පටන් ගද්දි ඉබේම ON (tap = OFF)':'🎙 ක්‍රියාත්මක කරන්න';$('shf').classList.toggle('on',S.sh);$('lp').classList.toggle('on',S.loop)}
+$('mv').oninput=e=>{S.mv=+e.target.value;sv()};$('thr').oninput=e=>{S.thr=+e.target.value;sv();upd()};
+$('shf').onclick=()=>{S.sh=!S.sh;$('s_sh').checked=S.sh;sv();upd();if(running)refill(true)};$('lp').onclick=()=>{S.loop=!S.loop;$('s_loop').checked=S.loop;sv();upd()};
+/* ---------- file library (IndexedDB) ---------- */
+const BLK=[['ad','📢 ඇඩ් voices','random, එකම එක පිට පිටම නෑ. ☑ අයින් කරලා තාවකාලිකව නවත්තන්න පුළුවන්'],['bg','🎼 Background music','ඇඩ් වලට යටින් ඇහෙන්නෙ'],['nm','🏪 ශොප් නම voice','සිංදු අතරේ වරින් වර'],['sj','🎵 ශොප් සිංදු කෑලි','නමේ පිළිවෙලට (1, 2, 3…) ඔක්කොම ප්ලේ වෙනවා'],['time','🕒 වෙලාව කියන voices','ෆයිල් නම 0930.mp3 හෝ 3.mp3. නැත්නම් dropdown එකෙන් තෝරන්න ']];
+const K=['song',...BLK.map(b=>b[0])],F={};K.forEach(k=>F[k]=[]);
+$('p1').innerHTML='<b>🎧 ඔයාගේ සිංදු</b> <span class="mut">(browser එකේ save වෙනවා, offline වැඩ)</span><div class="row" style="margin-top:8px"><label style="margin:0">ෆයිල්<input type="file" id="f-song" accept="audio/*" multiple></label><label style="margin:0">ෆෝල්ඩර් එකක්<input type="file" id="f-dir" webkitdirectory></label></div><div class="row" style="margin-top:8px"><button id="srtA">A→Z</button><button id="srtR">🔀 order අහඹුවෙන්</button></div><input id="q" placeholder="🔍 සිංදු හොයන්න"><div class="mut" style="margin-top:6px">☰ අල්ලලා ඇදලා order එක මාරු කරන්න (Shuffle off නම් ඒ order එකටම ප්ලේ වෙනවා). ⏭+ = ඊළඟට ප්ලේ කරන්න.</div><div id="l-song"></div>';
+$('p2').innerHTML=BLK.map(([k,t,d],i)=>(i?'<hr>':'')+'<b>'+t+'</b><div class="mut">'+d+(k==='time'?'<span id="tcov"></span>':'')+'</div><input type="file" id="f-'+k+'" accept="audio/*" multiple><div id="l-'+k+'"></div>').join('')+'<hr><b>🎙 කෙලින්ම record කරන්න</b><div class="row" style="margin-top:6px"><select id="rkind" style="font:inherit;background:#222;color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:8px"><option value="ad">ඇඩ් voice</option><option value="nm">ශොප් නම voice</option><option value="bg">Background music</option><option value="sj">ශොප් සිංදු කෑල්ලක්</option></select><button id="rec">⏺ Record</button></div><div id="rmsg" class="mut"></div>';
+const DB=new Promise((res,rej)=>{try{const r=indexedDB.open('shopradio',1);r.onupgradeneeded=()=>r.result.createObjectStore('f',{keyPath:'id',autoIncrement:true});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}});
+const tx=(m,fn)=>DB.then(db=>new Promise((res,rej)=>{const t=db.transaction('f',m),q=fn(t.objectStore('f'));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)}));
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+function parseTime(n){n=n.replace(/\.[^.]+$/,'');let h,m;if(/^\d+$/.test(n)){if(n.length<=2){h=+n;m=0}else if(n.length===3){h=+n[0];m=+n.slice(1)}else{h=+n.slice(0,2);m=+n.slice(2,4)}}else{const x=n.match(/(\d{1,2})\D+(\d{2})/)||n.match(/(\d{1,2})/);if(!x)return null;h=+x[1];m=x[2]?+x[2]:0}return h>23||m>59?null:h*60+m}
+const tOf=f=>f.t!=null?f.t:parseTime(f.name),hm=t=>String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
+const btn=(t,fn)=>{const b=document.createElement('button');b.textContent=t;b.onclick=fn;return b};
+function render(k){const L=$('l-'+k);L.innerHTML='';F[k].forEach((f,i)=>{const d=document.createElement('div');d.className='it'+(k==='song'&&f.id===cur?' on':'');d.dataset.i=i;
+ const sp=document.createElement('span');sp.textContent=(k==='song'?(i+1)+'. ':k==='time'&&tOf(f)==null?'⚠️ ':'')+f.name.replace(/\.[^.]+$/,'')+(f.win?' ⏰'+f.win:'');sp.style.opacity=f.off?.4:1;
+ if(k==='ad'||k==='nm'||k==='sj'){const c=document.createElement('input');c.type='checkbox';c.checked=!f.off;c.onchange=()=>{f.off=!c.checked;sp.style.opacity=f.off?.4:1;tx('readwrite',s=>s.put(f)).catch(()=>{})};d.append(c)}
+ if(k==='song'){const h=document.createElement('span');h.className='hd';h.textContent='☰';h.onpointerdown=e=>dragStart(e,i,d);d.append(h)}d.append(sp);
+ if(k==='time'){const s=document.createElement('select'),t=tOf(f);s.innerHTML='<option value="">වෙලාව?</option>'+Array.from({length:48},(_,j)=>'<option value="'+j*30+'">'+hm(j*30)+'</option>').join('');s.value=t==null?'':String(Math.round(t/30)*30);s.onchange=()=>{f.t=s.value===''?null:+s.value;tx('readwrite',st=>st.put(f)).catch(()=>{});render(k)};d.append(s)}
+ if(k==='ad'||k==='nm'||k==='sj'){
+  d.append(btn(f.w>1?'⭐'+f.w:'⭐',()=>{const v=prompt('ප්‍රමුඛතාව 1-3 (3 = වැඩියෙන්ම ප්ලේ වෙනවා)',f.w||1);if(v===null)return;f.w=Math.min(3,Math.max(1,parseInt(v)||1));tx('readwrite',st=>st.put(f)).catch(()=>{});render(k)}),
+  btn(f.win?'⏰✓':'⏰',()=>{const v=prompt('මේ voice එක ප්ලේ වෙන්න ඕනෙ වෙලාව (උදා: 06:00-11:00). හිස් කරලා OK ඔබනවා නම් හැමදාම.',f.win||'');if(v===null)return;f.win=/^\d{1,2}:\d{2}-\d{1,2}:\d{2}$/.test(v.trim())?v.trim():'';tx('readwrite',st=>st.put(f)).catch(()=>{});render(k)}),
+  btn('📡',()=>{if(!running){toast('මුලින් Radio එක පටන් ගන්න');return}k==='ad'?doBreak(false,f):k==='sj'?interludeNow(f):jingle(f)}))}
+ if(k==='song')d.append(btn('⏭+',()=>{upNext.push(f.id);toast('ඊළඟට ප්ලේ වෙනවා: '+sp.textContent)}));d.append(btn('▶',()=>{if(k==='song')userPlay(f.id);else{const a=new Audio(f.url);a.play().catch(()=>toast('⚠️ ප්ලේ වුණේ නෑ'))}}),btn('✕',()=>{F[k].splice(i,1);tx('readwrite',s=>s.delete(f.id)).catch(()=>{});if(k==='song'){order=order.filter(x=>x!==f.id);hist=hist.filter(x=>x!==f.id);if(f.id===cur&&running)advance('skip')}render(k)}));L.append(d)});
+ if(k==='song'&&$('q')&&$('q').oninput)$('q').oninput();if(k==='time'){const s=new Set();F.time.forEach(f=>{const t=tOf(f);if(t!=null)s.add(Math.round(t/30)%24)});$('tcov').textContent=' · වෙලාවල් 24න් '+s.size+'ක් ආවරණයි'}}
+const natural=(a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true});
+const saveOrd=()=>{S.ord=F.song.map(x=>x.id);sv()};
+const hl=()=>{const i=F.song.findIndex(x=>x.id===cur);[...$('l-song').children].forEach(d=>d.classList.toggle('on',+d.dataset.i===i))};
+function sortSongs(){const o=S.ord||[];F.song.sort((a,b)=>{const x=o.indexOf(a.id),y=o.indexOf(b.id);return x<0&&y<0?natural(a,b):x<0?1:y<0?-1:x-y})}
+function dragStart(e,i,row){e.preventDefault();const dr={i,over:i},rows=[...$('l-song').children];row.classList.add('drag');
+ const mv=ev=>{if(ev.clientY<90)scrollBy(0,-14);else if(ev.clientY>innerHeight-90)scrollBy(0,14);const el=document.elementFromPoint(ev.clientX,ev.clientY),r=el&&el.closest&&el.closest('.it');rows.forEach(x=>x.classList.remove('over'));if(r&&r.dataset.i!=null&&$('l-song').contains(r)){dr.over=+r.dataset.i;r.classList.add('over')}};
+ const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);if(dr.over!==dr.i){const [x]=F.song.splice(dr.i,1);F.song.splice(dr.over,0,x);saveOrd()}render('song')};
+ addEventListener('pointermove',mv);addEventListener('pointerup',up);addEventListener('pointercancel',up)}
+async function addFiles(k,files){let n=0;for(const f of files){if(!(f.type||'').startsWith('audio')&&!/\.(mp3|m4a|wav|ogg|aac|flac|opus|webm)$/i.test(f.name))continue;const o={kind:k,name:f.name,blob:f};try{o.id=await tx('readwrite',s=>s.add(o))}catch(e){o.id=Math.random()}o.url=URL.createObjectURL(f);F[k].push(o);n++;
+ if(k==='song'&&running&&S.sh)order.splice(Math.floor(Math.random()*(order.length+1)),0,o.id)}
+ if(k==='song'){sortSongs();saveOrd()}render(k);toast('✅ '+n+' ෆයිල් එකතු කළා')}
+K.forEach(k=>$('f-'+k).onchange=e=>{addFiles(k,[...e.target.files]);e.target.value=''});$('f-dir').onchange=e=>{addFiles('song',[...e.target.files]);e.target.value=''};
+tx('readonly',s=>s.getAll()).then(a=>{(a||[]).forEach(r=>{r.url=URL.createObjectURL(r.blob);F[r.kind]&&F[r.kind].push(r)});sortSongs();K.forEach(render);$('q').oninput=()=>{const v=$('q').value.toLowerCase();[...$('l-song').children].forEach(d=>d.style.display=d.textContent.toLowerCase().includes(v)?'':'none')};$('srtA').onclick=()=>{F.song.sort(natural);saveOrd();render('song')};$('srtR').onclick=()=>{shuffle(F.song);saveOrd();render('song')}}).catch(()=>{});
+/* ---------- audio engine ---------- */
+const SIL='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+const la=new Audio(),adEl=new Audio(),bgEl=new Audio();
+let jP=false,running=false,paused=false,busy=false,cur=null,order=[],hist=[],upNext=[],sc=0,songN=0,adLeft=0,pendNext=false,adv=false,fails=0,stTxt='',cv=0,micD=1,adD=1,bgT=0,lastSlot='',stopped='',talk=false;
+const inW=(w,d)=>{const m=(w||'').trim().match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/);if(!m)return d;const a=+m[1]*60+ +m[2],b=+m[3]*60+ +m[4],d2=new Date(),n=d2.getHours()*60+d2.getMinutes();return a<=b?n>=a&&n<b:n>=a||n<b};
+const ivNow=()=>inW(S.rush,false)?S.rushIv:S.iv,slot=()=>{const d=new Date();return d.toDateString()+(d.getHours()*2+(d.getMinutes()>=30?1:0))};
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+/* volume: one loop eases everything, so ads/mic/fades never fight each other */
+setInterval(()=>{const d=la.duration,f=isFinite(d)?(S.fd&&d>8?clamp(Math.min(S.fi?la.currentTime/S.fi:1,S.fo?(d-la.currentTime)/S.fo:1)):1):0;
+ cv+=((S.vsOn&&inW(S.vsch,false)?S.vsv:S.mv)/100*micD*adD-cv)*.12;const nv=clamp(cv*f);if(Math.abs(la.volume-nv)>.002)la.volume=nv;const b0=bgEl.volume,nb=clamp(b0+(bgT-b0)*.12);if(Math.abs(nb-b0)>.002)bgEl.volume=nb},50);
+function playEl(el,url,vol){return new Promise(async(res,rej)=>{let done=false,wd;const fin=ok=>{if(done)return;done=true;clearTimeout(wd);el.onended=el.onerror=null;ok?res():rej(new Error('ෆයිල් එක ප්ලේ වුණේ නෑ'))};
+ el.onended=()=>fin(true);el.onerror=()=>fin(false);wd=setTimeout(()=>fin(true),300000);el.src=url;el.volume=vol;
+ for(let i=0;i<3;i++){try{await el.play();return}catch(e){await sleep(400)}}fin(false)})}
+const ready=url=>new Promise((res,rej)=>{const a=new Audio();a.preload='auto';a.onloadedmetadata=()=>res();a.onerror=()=>rej(new Error('ෆයිල් එක කියවන්න බෑ'));a.src=url;setTimeout(()=>rej(new Error('load වුණේ නෑ')),8000)});
+const bag={},lp={};function rnd(k){const el=F[k].filter(f=>!f.off&&inW(f.win,true));if(!el.length)return null;let b=(bag[k]||[]).filter(x=>el.includes(x));if(!b.length)b=shuffle(el.flatMap(f=>Array(f.w||1).fill(f)));
+ let i=b.length-1;while(i>0&&b[i]===lp[k])i--;const x=b.splice(i,1)[0];bag[k]=b;lp[k]=x;return x}
+function timeClip(){const d=new Date(),n=d.getHours()*60+d.getMinutes();let b=null,bd=16;F.time.forEach(f=>{const t=tOf(f);if(t==null)return;let x=Math.abs(t-n)%720;x=Math.min(x,720-x);if(x<bd){bd=x;b=f}});return b}
+/* ---------- queue: shuffle bag = no repeats until everything played ---------- */
+function refill(ex){const ids=F.song.map(s=>s.id).filter(id=>!(ex&&id===cur));order=shuffle(ids);if(!ex&&order.length>1&&order[0]===cur)order.push(order.shift())}
+function pick(){const L=F.song;if(!L.length)return null;while(upNext.length){const id=upNext.shift();if(L.some(x=>x.id===id)){order=order.filter(x=>x!==id);return id}}
+ if(!S.sh){const i=L.findIndex(x=>x.id===cur);return i+1>=L.length?(S.loop?L[0].id:null):L[i+1].id}
+ order=order.filter(id=>L.some(x=>x.id===id));if(!order.length){if(!S.loop)return null;refill(false)}return order.shift()}
+function userPlay(id){order=order.filter(x=>x!==id);if(!running){start(id);return}if(cur!=null)hist.push(cur);playSong(id)}
+async function playSong(id){const f=F.song.find(x=>x.id===id);if(!f){advance('skip');return}cur=id;jP=false;la.volume=0;la.src=f.url;
+ try{await la.play();fails=0}catch(e){if(++fails>=F.song.length){toast('⚠️ සිංදු ප්ලේ කරන්න බෑ');stop();return}toast('⚠️ ප්ලේ වුණේ නෑ: '+f.name);setTimeout(()=>{if(running)advance('skip')},700);return}
+ songN++;lg('song',f.name);setNP();hl();jP=S.nmOn&&S.jn>0&&songN%S.jn===0&&F.nm.some(f=>!f.off&&inW(f.win,true))}
+async function advance(how){const back=how==='back';if(adv)return;adv=true;if(!how)try{await interlude()}catch(e){busy=false}adv=false;if(!running)return;
+ let id;if(back){id=hist.pop();if(id==null)id=cur}else{if(cur!=null)hist.push(cur);if(hist.length>60)hist.shift();id=pick()}
+ if(id==null){stop();toast('Queue එක ඉවරයි');return}playSong(id)}
+la.onended=()=>{if(busy){pendNext=true;return}advance()};la.onerror=()=>{if(running&&la.src){fails++;if(fails<F.song.length)advance('skip')}};
+la.ontimeupdate=()=>{const d=la.duration;if(!isFinite(d))return;if(jP&&la.currentTime>=Math.max(0,S.jd-1)&&!busy&&!paused){jP=false;jingle()}if(!seeking)$('seek').value=la.currentTime/d*1000;$('t1').textContent=mmss(la.currentTime);$('t2').textContent=S.rem?'-'+mmss(d-la.currentTime):mmss(d);$('t2').style.color=d-la.currentTime<10?'var(--ac)':''};
+let seeking=false;$('t2').onclick=()=>{S.rem=!S.rem;$('s_rem').checked=S.rem;sv()};$('seek').oninput=()=>{seeking=true;if(isFinite(la.duration))la.currentTime=$('seek').value/1000*la.duration};$('seek').onchange=()=>seeking=false;
+async function interlude(){sc++;if(!(S.sjOn&&sc>=Math.max(1,S.sn)))return;let L=F.sj.filter(f=>!f.off&&inW(f.win,true));if(!L.length)return;L=S.sjAll?L.sort(natural):[rnd('sj')];sc=0;busy=true;stTxt='🎼 ශොප් සිංදුව';ui();
+ for(const f of L){if(!running)break;try{await ready(f.url);lg('sj',f.name);await playEl(adEl,f.url,S.sjv/100)}catch(e){toast('⚠️ '+e.message)}}busy=false;ui()}
+async function interludeNow(f){if(busy||!running||paused)return;busy=true;stTxt='🎼 ශොප් සිංදුව';ui();adD=S.dv/100;
+ try{await ready(f.url);await sleep(1200);lg('sj',f.name);await playEl(adEl,f.url,S.sjv/100)}catch(e){toast('⚠️ '+e.message)}adD=1;await sleep(900);busy=false;fin()}
+function fin(){ui();if(pendNext){pendNext=false;if(running&&!paused)advance()}}
+async function jingle(f){if(busy||!running||paused)return;f=f||rnd('nm');if(!f)return;busy=true;stTxt='🏪 ශොප් නම';ui();adD=S.dv/100;
+ try{await ready(f.url);await sleep(700);lg('nm',f.name);await playEl(adEl,f.url,S.av/100)}catch(e){toast('⚠️ '+e.message)}adD=1;await sleep(900);busy=false;fin()}
+/* ad break: everything is verified BEFORE the music is ducked, errors are shown instead of silently skipped */
+async function doBreak(wt,fa){if(busy||!running||paused)return;const ad=fa||(S.adOn?rnd('ad'):null),tc=wt&&S.tm?timeClip():null;
+ if(!ad&&!tc){adLeft=ivNow()*60000;toast('⚠️ ඇඩ් voice එකක් දාලා නෑ');return}
+ busy=true;stTxt='📢 ඇඩ් එක ප්ලේ වෙනවා';ui();
+ try{if(ad)await ready(ad.url);if(tc)await ready(tc.url);if(ad)lg('ad',ad.name);if(tc)lg('time',tc.name);
+  adD=S.dv/100;await sleep(1500);
+  if(ad){const bf=S.bgOn?rnd('bg'):null;if(bf){try{bgEl.src=bf.url;bgEl.loop=true;bgEl.volume=0;await bgEl.play();bgT=S.bv/100}catch(e){}}
+   await sleep(1200);await playEl(adEl,ad.url,S.av/100);await sleep(600);bgT=0;await sleep(1500);bgEl.pause()}
+  if(tc){await sleep(300);await playEl(adEl,tc.url,S.av/100)}
+ }catch(e){bgT=0;bgEl.pause();toast('⚠️ ඇඩ් එක ප්ලේ වුණේ නෑ: '+e.message)}
+ adD=1;adLeft=ivNow()*60000;await sleep(1200);busy=false;fin()}
+/* ---------- controls ---------- */
+let wl=null;const lock=async()=>{if(!S.wk)return;try{wl=await navigator.wakeLock.request('screen')}catch(e){}};
+document.addEventListener('visibilitychange',()=>{if(running&&document.visibilityState==='visible')lock()});
+function start(id){if(!F.song.length){toast('⚠️ මුලින් සිංදු දාන්න');document.querySelector('[data-p=p1]').click();return}
+ [adEl,bgEl].forEach(e=>{e.loop=false;e.src=SIL;e.play().catch(()=>{})});running=true;paused=false;busy=false;adv=false;fails=0;hist=[];sc=0;adLeft=ivNow()*60000;lastSlot=slot();lock();if(S.auto&&!an)micOn();
+ if(id==null){refill(false);id=S.sh?pick():F.song[0].id}else refill(true);setMS();playSong(id);ui()}
+function stop(){running=false;paused=false;busy=false;la.pause();adEl.pause();bgEl.pause();bgT=0;adD=1;try{wl&&wl.release()}catch(e){}ui();setNP()}
+function togglePause(){if(!running){start();return}paused=!paused;if(paused)la.pause();else la.play().catch(()=>{});ui()}
+$('pp').onclick=togglePause;$('stop').onclick=stop;$('nxt').onclick=()=>{if(running&&!busy)advance('skip')};$('prv').onclick=()=>{if(!running||busy)return;if(la.currentTime>3)la.currentTime=0;else advance('back')};
+$('adnow').onclick=()=>running?doBreak(false,rnd('ad')):toast('මුලින් Radio එක පටන් ගන්න');
+function ui(){$('pp').textContent=running&&!paused?'⏸':'▶';$('pp').classList.toggle('run',running&&!paused);$('disc').classList.toggle('play',running&&!paused);$('dw').classList.toggle('play',running&&!paused);$('vz').classList.toggle('play',running&&!paused);
+ $('st').textContent=!running?'නවත්තලා':busy?stTxt:paused?'⏸ Pause කළා':'▶ ප්ලේ වෙනවා';$('air').textContent=running?(busy?'● ON AIR':'● LIVE'):'OFF AIR';$('air').classList.toggle('on',running&&busy)}
+function setNP(){const f=F.song.find(x=>x.id===cur),t=running&&f?f.name.replace(/\.[^.]+$/,''):'සිංදු දාලා ▶ ඔබන්න';const n=$('np');if(n.textContent!==t){n.textContent=t;n.classList.remove('sw');void n.offsetWidth;n.classList.add('sw')}document.title=running?'📻 '+t:'Shop Radio';
+ try{navigator.mediaSession.metadata=new MediaMetadata({title:t,artist:S.shop||'Shop Radio'})}catch(e){}}
+function setMS(){try{const m=navigator.mediaSession;m.setActionHandler('play',togglePause);m.setActionHandler('pause',togglePause);m.setActionHandler('nexttrack',()=>$('nxt').click());m.setActionHandler('previoustrack',()=>$('prv').click())}catch(e){}}
+/* ---------- mic auto-volume ---------- */
+let mc=null,an=null,ms=null,lvl=0,loud=0,quiet=0,calS=null;const buf=new Uint8Array(1024);
+async function micOn(){if(an)return;try{ms=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:false,autoGainControl:false}});mc=new AudioContext();an=mc.createAnalyser();an.fftSize=1024;mc.createMediaStreamSource(ms).connect(an);$('micb').textContent='🎙 නවත්තන්න';$('micb').classList.add('on')}catch(e){S.auto=false;sv();$('s_auto').checked=false;upd();toast('❌ mic එකට අවසර නෑ (browser එකේ Allow කරන්න)')}}
+function micOff(){try{ms&&ms.getTracks().forEach(t=>t.stop());mc&&mc.close()}catch(e){}an=ms=mc=null;micD=1;lvl=0;$('meter').style.transform='scaleX(0)';$('micb').textContent='🎙 ක්‍රියාත්මක කරන්න';$('micb').classList.remove('on');$('micst').textContent='';$('glow').style.transform='';$('glow').style.opacity=''}
+function setAuto(v){S.auto=v;sv();$('s_auto').checked=v;v?micOn():(micOff(),upd())}$('micb').onclick=()=>setAuto(!an);
+$('cal').onclick=()=>{if(!an){toast('මුලින් mic එක ක්‍රියාත්මක කරන්න');return}calS=[];toast('🎯 තත්පර 5ක් කඩේ සාමාන්‍ය සද්දෙට ඉන්න…');setTimeout(()=>{if(!calS||!calS.length)return;const a=calS.reduce((x,y)=>x+y,0)/calS.length;S.thr=clamp(Math.round(a*1.6+4),1,100);sv();upd();calS=null;toast('✅ Threshold '+S.thr+' ට හැදුවා')},5000)};
+setInterval(()=>{if(!an)return;an.getByteTimeDomainData(buf);let s=0;for(const b of buf){const v=(b-128)/128;s+=v*v}
+ lvl+=(clamp(Math.sqrt(s/buf.length)*400,0,100)-lvl)*.3;$('meter').style.transform='scaleX('+lvl/100+')';$('glow').style.transform='scale('+(.9+lvl/150)+')';$('glow').style.opacity=.2+lvl/140;if(calS)calS.push(lvl);
+ if(!running||paused||busy||talk){return}
+ if(lvl>S.thr){loud+=100;quiet=0}else if(lvl<S.thr*.75){quiet+=100;loud=0}
+ if(loud>=S.lt*1000&&micD===1){micD=S.md/100}if(quiet>=S.qt*1000&&micD<1){micD=1}
+ $('micst').textContent=micD<1?'🔉 කඩේ සද්දෙ වැඩියි, සිංදුව අඩු කරලා':'🔊 නිශ්ශබ්දයි, සිංදුව සාමාන්‍යයි'},100);
+/* ---------- display / dim / live ---------- */
+const nowHM=()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};let doi=0,dot=5;
+function dispUpd(){const dp=$('disp');if(dp.style.display!=='flex')return;dp.classList.toggle('idle',!running||paused);$('d1').textContent=S.shop||'Shop Radio';$('d2').textContent=nowHM();const f=F.song.find(x=>x.id===cur);$('d3').textContent=running&&f?'🎵 '+f.name.replace(/\.[^.]+$/,''):'';$('don').style.opacity=busy?1:0;
+ const o=(S.offers||'').split('\n').map(x=>x.trim()).filter(Boolean);if(++dot>=6&&o.length){dot=0;$('dof').style.opacity=0;setTimeout(()=>{$('dof').textContent=o[doi++%o.length];$('dof').style.opacity=1},600)}}
+$('dispb').onclick=()=>{$('disp').style.display='flex';dot=5;try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}dispUpd()};
+$('disp').onclick=()=>{$('disp').style.display='none';try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}};
+$('dimb').onclick=()=>$('dim').style.display='block';$('dim').onclick=()=>$('dim').style.display='none';
+let lv=null;async function liveStart(){if(lv||busy||!running)return;busy=true;talk=true;lv={};stTxt='🎤 LIVE';ui();try{const st=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});if(!lv){st.getTracks().forEach(t=>t.stop());return}const c=new AudioContext();c.createMediaStreamSource(st).connect(c.destination);lv={st,c};adD=.1}catch(e){lv=null;talk=false;busy=false;ui();toast('❌ mic එකට අවසර නෑ')}}
+async function liveStop(){if(!lv&&!talk)return;const x=lv;lv=null;try{x&&x.st&&x.st.getTracks().forEach(t=>t.stop());x&&x.c&&x.c.close()}catch(e){}adD=1;talk=false;await sleep(600);busy=false;fin()}
+const lb=$('live');lb.onpointerdown=liveStart;lb.onpointerup=liveStop;lb.onpointerleave=liveStop;lb.onpointercancel=liveStop;lb.oncontextmenu=e=>e.preventDefault();
+/* ---------- report / backup / tabs / clock ---------- */
+let LOG=[];try{LOG=JSON.parse(localStorage.getItem('sr_log')||'[]')}catch(e){}
+function lg(y,n){LOG.push({t:Date.now(),y,n});if(LOG.length>600)LOG.splice(0,LOG.length-600);try{localStorage.setItem('sr_log',JSON.stringify(LOG))}catch(e){}}
+function stats(){const t0=new Date().setHours(0,0,0,0),td=LOG.filter(x=>x.t>=t0),c=y=>td.filter(x=>x.y===y).length,per={},ic={ad:'📢',nm:'🏪',time:'🕒',song:'🎵',sj:'🎼'};td.forEach(x=>{if(x.y==='ad')per[x.n]=(per[x.n]||0)+1});
+ $('sum').textContent='අද: ඇඩ් '+c('ad')+' · ශොප් නම '+c('nm')+' · වෙලාව '+c('time')+' · සිංදු '+c('song');$('sl').innerHTML='';
+ const add=(t,b)=>{const d=document.createElement('div');d.className='it';d.textContent=t;if(b)d.style.fontWeight=700;$('sl').appendChild(d)};
+ Object.keys(per).forEach(n=>add('📢 '+n+' — '+per[n]+' පාරක්',1));LOG.slice(-15).reverse().forEach(x=>add(new Date(x.t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+' '+(ic[x.y]||'')+' '+(x.n||'')))}
+$('clrlog').onclick=()=>{LOG=[];try{localStorage.removeItem('sr_log')}catch(e){}stats()};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button,.pane').forEach(x=>x.classList.remove('a'));b.classList.add('a');$(b.dataset.p).classList.add('a');if(b.dataset.p==='p4')stats()});
+$('bk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({S})],{type:'application/json'}));a.download='radio-settings.json';a.click()};
+$('rs').onclick=()=>$('rsf').click();$('rsf').onchange=async e=>{try{const d=JSON.parse(await e.target.files[0].text());Object.assign(S,d.S||{});sv();location.reload()}catch(x){toast('❌ backup ෆයිල් එක කියවන්න බෑ')}};
+let lt=Date.now();setInterval(()=>{const now=Date.now(),dt=now-lt;lt=now;const n=nowHM();$('dclk').textContent=n;
+ if(running&&S.stopAt&&n===S.stopAt&&stopped!==n+new Date().toDateString()){stopped=n+new Date().toDateString();stop();return}
+ if(running&&!paused&&!busy){const cs=slot();if(cs!==lastSlot){lastSlot=cs;if(S.tm){doBreak(true);return}}if(S.adOn){adLeft-=dt;if(adLeft<=0)doBreak()}else adLeft=ivNow()*60000}
+ $('cd').textContent=running&&S.adOn?'ඊළඟ ඇඩ් එකට '+mmss(Math.max(0,adLeft)/1000):'';dispUpd();ui()},1000);
+addEventListener('keydown',e=>{if(!S.kb||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.code==='Space'){e.preventDefault();togglePause()}else if(e.code==='ArrowRight')$('nxt').click();else if(e.code==='ArrowLeft')$('prv').click()});
+for(let i=0;i<22;i++){const b=document.createElement('i');b.style.animationDuration=(.5+Math.random()*.7)+'s';b.style.animationDelay=(-Math.random())+'s';$('vz').appendChild(b)}
+let mr=null,chunks=[];$('rec').onclick=async()=>{if(mr&&mr.state==='recording'){mr.stop();return}try{const st=await navigator.mediaDevices.getUserMedia({audio:true});mr=new MediaRecorder(st);chunks=[];mr.ondataavailable=e=>chunks.push(e.data);mr.onstop=()=>{st.getTracks().forEach(t=>t.stop());const nm=prompt('නමක් දෙන්න','record '+new Date().toLocaleTimeString())||'record';addFiles($('rkind').value,[new File(chunks,nm+'.webm',{type:mr.mimeType||'audio/webm'})]);$('rec').textContent='⏺ Record';$('rmsg').textContent='✅ save වුණා'};mr.start();$('rec').textContent='⏹ නවත්තන්න';$('rmsg').textContent='🔴 record වෙනවා…'}catch(e){$('rmsg').textContent='❌ mic එකට අවසර නෑ'}};
+upd();ui();
+</script></body></html>
